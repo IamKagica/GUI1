@@ -154,6 +154,24 @@ namespace GUI1 {
 			this->button2->TabIndex = 8;
 			this->button2->Text = L"Reset";
 			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
+			
+			//Reset button
+		private: System::Void button2_click(System::Object^ sender, System::EventArgs^ e)
+		{
+			//clear label fields
+			this->label1->Text = "0";
+			this->label2->Text = "0";
+			this->label3->Text = "0";
+			this->label4->Text = "0";
+			this->label5->Text = "0";
+			this->label6->Text = "0";
+			this->label7->Text = "0";
+
+			// set button state
+			this->button1->Enabled = true;
+			this->button2->Enabled = false;
+		}
 			// 
 			// pictureBox1
 			// 
@@ -169,7 +187,7 @@ namespace GUI1 {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(461, 132);
+			this->ClientSize = System::Drawing::Size(409, 132);
 			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
@@ -183,6 +201,7 @@ namespace GUI1 {
 			this->Name = L"MyForm";
 			this->Text = L"MyForm";
 			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
+			this->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
