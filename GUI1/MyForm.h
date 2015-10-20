@@ -154,24 +154,7 @@ namespace GUI1 {
 			this->button2->TabIndex = 8;
 			this->button2->Text = L"Reset";
 			this->button2->UseVisualStyleBackColor = true;
-			this->button2->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
-			
-			//Reset button
-		private: System::Void button2_click(System::Object^ sender, System::EventArgs^ e)
-		{
-			//clear label fields
-			this->label1->Text = "0";
-			this->label2->Text = "0";
-			this->label3->Text = "0";
-			this->label4->Text = "0";
-			this->label5->Text = "0";
-			this->label6->Text = "0";
-			this->label7->Text = "0";
-
-			// set button state
-			this->button1->Enabled = true;
-			this->button2->Enabled = false;
-		}
+			this->button2->Click += gcnew System::EventHandler(this, &MyForm::button2_Click);
 			// 
 			// pictureBox1
 			// 
@@ -211,6 +194,9 @@ namespace GUI1 {
 	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {
 	}
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+}
+private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
+	this-> label1 -> Text = L"0";
 }
 };
 }
