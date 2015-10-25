@@ -1,4 +1,6 @@
 #pragma once
+#include <cstdlib>
+#include <time.h>
 
 namespace GUI1 {
 
@@ -44,6 +46,8 @@ namespace GUI1 {
 	private: System::Windows::Forms::Button^  button1;
 	private: System::Windows::Forms::Button^  button2;
 	private: System::Windows::Forms::PictureBox^  pictureBox1;
+	private: System::Windows::Forms::CheckBox^  checkBox1;
+	private: System::Windows::Forms::CheckedListBox^  checkedListBox1;
 	protected:
 
 	private:
@@ -70,6 +74,8 @@ namespace GUI1 {
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
+			this->checkedListBox1 = (gcnew System::Windows::Forms::CheckedListBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -154,24 +160,7 @@ namespace GUI1 {
 			this->button2->TabIndex = 8;
 			this->button2->Text = L"Reset";
 			this->button2->UseVisualStyleBackColor = true;
-			this->button2->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
-			
-			//Reset button
-		private: System::Void button2_click(System::Object^ sender, System::EventArgs^ e)
-		{
-			//clear label fields
-			this->label1->Text = "0";
-			this->label2->Text = "0";
-			this->label3->Text = "0";
-			this->label4->Text = "0";
-			this->label5->Text = "0";
-			this->label6->Text = "0";
-			this->label7->Text = "0";
-
-			// set button state
-			this->button1->Enabled = true;
-			this->button2->Enabled = false;
-		}
+			this->button2->Click += gcnew System::EventHandler(this, &MyForm::button2_Click);
 			// 
 			// pictureBox1
 			// 
@@ -183,11 +172,32 @@ namespace GUI1 {
 			this->pictureBox1->TabIndex = 9;
 			this->pictureBox1->TabStop = false;
 			// 
+			// checkBox1
+			// 
+			this->checkBox1->AutoSize = true;
+			this->checkBox1->Location = System::Drawing::Point(12, 113);
+			this->checkBox1->Name = L"checkBox1";
+			this->checkBox1->Size = System::Drawing::Size(84, 17);
+			this->checkBox1->TabIndex = 10;
+			this->checkBox1->Text = L"Other Image";
+			this->checkBox1->UseVisualStyleBackColor = true;
+			this->checkBox1->CheckedChanged += gcnew System::EventHandler(this, &MyForm::checkBox1_checked);
+			// 
+			// checkedListBox1
+			// 
+			this->checkedListBox1->FormattingEnabled = true;
+			this->checkedListBox1->Location = System::Drawing::Point(152, 125);
+			this->checkedListBox1->Name = L"checkedListBox1";
+			this->checkedListBox1->Size = System::Drawing::Size(120, 94);
+			this->checkedListBox1->TabIndex = 11;
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(409, 132);
+			this->ClientSize = System::Drawing::Size(409, 262);
+			this->Controls->Add(this->checkedListBox1);
+			this->Controls->Add(this->checkBox1);
 			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
@@ -201,7 +211,6 @@ namespace GUI1 {
 			this->Name = L"MyForm";
 			this->Text = L"MyForm";
 			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
-			this->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -211,6 +220,44 @@ namespace GUI1 {
 	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {
 	}
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+	int num[7] = { 0 };
+
+	// seed
+	srand((int) time(0));
+
+	//Randomize the array values.
+	for (int i = 0; i < 7; i++)
+		num[i] = (rand() % 99) + 1;
+	this->label1->Text = Convert::ToString(num[0]);
+	this->label2->Text = Convert::ToString(num[1]);
+	this->label3->Text = Convert::ToString(num[2]);
+	this->label4->Text = Convert::ToString(num[3]);
+	this->label5->Text = Convert::ToString(num[4]);
+	this->label6->Text = Convert::ToString(num[5]);
+	this->label7->Text = Convert::ToString(num[6]);
+
+	this->button1->Enabled = false;
+	this->button2->Enabled = true;
+
+	
+}
+private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
+	//clear label fields
+	this->label1 -> Text = L"0";
+	this->label2->Text = L"0";
+	this->label3->Text = L"0";
+	this->label4->Text = L"0";
+	this->label5->Text = L"0";
+	this->label6->Text = L"0";
+	this->label7->Text = L"0";
+
+	this->button1->Enabled = true;
+	this->button2->Enabled = false;
+}
+
+
+private: System::Void checkBox1_checked(System::Object^  sender, System::EventArgs^  e) {
+	this->pictureBox1->Image = (/*cli::safe_cast*/<System::Drawing::Image^>?(/*resources->GetObject*/(L"pictureBox1.Image2")));
 }
 };
 }
